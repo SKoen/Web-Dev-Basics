@@ -1,16 +1,27 @@
-<table>
+
+<table class="table table-striped table-hover">
+    <thead>
     <tr>
-        <th>AuthorName</th>
-        <th>QuestionName</th>
-        <th>QuestionText</th>
+        <th>Number Of Question</th>
+        <th>Question Name</th>
         <th>NumberOfVisits</th>
     </tr>
+    </thead>
+
+    <tbody>
     <?php foreach($this->questions as $question): ?>
-    <tr>
-        <td><?= htmlspecialchars($question['AuthorName']) ?></td>
-        <td><?= htmlspecialchars($question['QuestionName']) ?></td>
-        <td><?= htmlspecialchars($question['QuestionText']) ?></td>
-        <td><?= htmlspecialchars($question['NumberOfVisits']) ?></td>
-    </tr>
+          <tr class="info">
+            <td><?= htmlspecialchars($question['questionId']) ?></td>
+            <td><?= htmlspecialchars($question['questionTitle']) ?></td>
+            <td><?= htmlspecialchars($question['numberOfViews']) ?></td>
+          <td><a href="/questions/<?=$question['questionId']?> ">READ</a></td>
+        </tr>
+        <tr class="active">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
     <?php endforeach ?>
+    </tbody>
 </table>

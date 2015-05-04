@@ -33,9 +33,16 @@ abstract class BaseController {
             }
             $viewFileName = 'views/' . $this->controllerName
                 . '/' . $viewName . '.php';
-            $this->isViewRendered = true;
-
+            if ($includeLayout) {
+                $headerFile = 'views/layouts/' . $this->layoutName . '/header.php';
+                include_once($headerFile);
+            }
             include_once($viewFileName);
+            if ($includeLayout) {
+                $footerFile = 'views/layouts/' . $this->layoutName . '/footer.php';
+                include_once($footerFile);
+            }
+            $this->isViewRendered = true;
         }
     }
 }
