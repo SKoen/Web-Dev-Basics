@@ -22,7 +22,11 @@
             <li><a href="/">Home</a></li>
             <li><a href="/questions">Questions</a></li>
         </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="/login">Login</a></li>
+        </ul>
     </div>
+
 </nav>
 <row>
     <div class="col-md-1"></div>
