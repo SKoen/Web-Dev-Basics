@@ -24,7 +24,7 @@ $controllerFileName = "controllers/" . $controllerClassName . '.php';
 if (class_exists($controllerClassName)) {
     $controller = new $controllerClassName($controllerName, $action);
 } else {
-    die("Cannot find controller '$controllerName' in class '$controllerFileName'");
+    die("Cannot find controller '$controllerName' in class '$controllerClassName'");
 }
 
 if (method_exists($controller, $action)) {
