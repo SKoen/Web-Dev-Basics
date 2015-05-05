@@ -4,6 +4,7 @@ class QuestionsController extends BaseController {
     public function oninit(){
 
     }
+
     public  function create (){
 
     }
