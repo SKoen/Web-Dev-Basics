@@ -9,10 +9,11 @@ join users u on q.authorId=u.Id");
     }
     public function getOne($id){
         $statement = self::$db->query(
-            "select q.questionTitle,q.numberOfViews,q.questionText,a.responderName,a.responderText,a.responderEmail,a.dateCreated ,u.username from questions q
+            "select q.questionTitle,q.numberOfViews,q.questionText,q.dateCreated as 'questionDate' ,a.responderName,a.responderText,a.responderEmail,a.dateCreated as answerDate ,u.username from questions q
 join answers  a on q.questionId=a.questionID
 join users u on q.authorId=u.Id
-where q.questionId=$id");
+where q.questionId=$id
+");
         return $statement->fetch_all(MYSQLI_ASSOC);
     }
 }

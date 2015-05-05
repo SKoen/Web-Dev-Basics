@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="/content/styles.css" />
     <link rel="stylesheet" href="/content/bootstrap/bootstrap.css" />
     <link rel="stylesheet" href="/content/bootstrap/bootstrap.min.css" />
+    <script src="/content/js/js.js"></script>
     <meta charset="utf-8">
     <title>
         <?php if (isset($this->title)) echo htmlspecialchars($this->title) ?>

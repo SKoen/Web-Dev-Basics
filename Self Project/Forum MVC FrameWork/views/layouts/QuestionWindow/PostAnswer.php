@@ -1,4 +1,4 @@
-<div class="col-lg-12 answer">
+<div class="col-lg-12 answer" id="postanswer" style="display: none">
     <form class="form-horizontal">
         <fieldset>
             <legend>Write your answer</legend>
