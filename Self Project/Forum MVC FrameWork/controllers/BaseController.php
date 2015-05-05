@@ -13,6 +13,7 @@ abstract class BaseController {
     protected $layoutName = DEFAULT_LAYOUT;
     protected $isViewRendered = false;
     protected $isPost = false;
+    protected $isLoggedIn;
 
     function __construct($controllerName, $actionName) {
         $this->controllerName = $controllerName;
@@ -20,10 +21,20 @@ abstract class BaseController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->isPost = true;
         }
+
+        if(isset($_SESSION['username'])){
+            $this->isLoggedIn=true;
+        }
+
+        $this->OnInit();
+
     }
 
     public function  index (){
        // echo "IndexView";
+    }
+    public function OnInit(){
+
     }
 
     public function renderView($viewName = null, $includeLayout = true) {

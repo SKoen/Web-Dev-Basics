@@ -1,8 +1,8 @@
 <?php
 
 class QuestionsController extends BaseController {
-    public function oninit(){
-
+    public function onInit(){
+        $this->title='Question';
     }
 
     public  function create (){

@@ -15,7 +15,7 @@
 <body>
 <nav class="navbar navbar-default col-md-12">
     <div class="navbar-header">
-        <a href="#"><img class="img navbar-brand" src="/content/images/the-forum-logo.png"></a>
+        <a href="/"><img class="img navbar-brand" src="/content/images/the-forum-logo.png"></a>
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -23,9 +23,21 @@
             <li><a href="/">Home</a></li>
             <li><a href="/questions">Questions</a></li>
         </ul>
+        <?php if(!($this->isLoggedIn)): ?>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="/login">Login</a></li>
+            <li><a href="/accounts/login">Login</a></li>
+            <li><a href="/accounts/register">Register</a></li>
         </ul>
+        <?php endif; ?>
+
+        <?php if($this->isLoggedIn): ?>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/accounts/edit">My Profile</a></li>
+                <li><a >Welcome, <?php echo $_SESSION['username'] ?></a></li>
+                <li><a href="/accounts/logout">Logout</a></li>
+            </ul>
+        <?php endif; ?>
+
     </div>
 
 </nav>
