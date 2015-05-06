@@ -46,7 +46,4 @@ class AccountsController extends BaseController {
         $this->redirect('home');
     }
 
-    public  function  edit (){
-
-    }
 }

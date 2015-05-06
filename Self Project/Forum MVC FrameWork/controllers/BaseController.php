@@ -25,7 +25,16 @@ abstract class BaseController {
         if(isset($_SESSION['username'])){
             $this->isLoggedIn=true;
         }
+     //  $this->ErrorMessage = function ($msg) {
+     //      array('noty'=>
+     //      array('text'=> $msg)),
+     //      array('type'=> 'info'),
+     //      array('layout'=> 'topCenter'),
+     //      array('timeout'=> 5000)
+     //      );
+     //  }
 
+    //}
         $this->OnInit();
 
     }

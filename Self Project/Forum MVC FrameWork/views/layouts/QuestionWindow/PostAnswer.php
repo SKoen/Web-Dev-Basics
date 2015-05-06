@@ -14,7 +14,7 @@
                     <input type="email" name="email" class="form-control" placeholder="Email">
                     <span class="help-block">Optional*</span>
                 </div>
-                <input type="hidden" name="questionId" value=<?= $this->question[0]['questionId']?>>
+                <input type="hidden" name="questionId" value=<?= $this->question['questionId']?>>
             </div>
             <div class="form-group">
                 <label for="text" class="col-lg-2 control-label">Textarea</label>

@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="/content/bootstrap/bootstrap.css" />
     <link rel="stylesheet" href="/content/bootstrap/bootstrap.min.css" />
     <script src="/content/js/js.js"></script>
+    <script src="/content/js/jquery-2.1.1.js"></script>
+    <script src="/content/js/jquery.noty.packaged.min.js"></script>
     <meta charset="utf-8">
     <title>
         <?php if (isset($this->title)) echo htmlspecialchars($this->title) ?>
@@ -32,7 +34,7 @@
 
         <?php if($this->isLoggedIn): ?>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/accounts/edit">My Profile</a></li>
+                <li><a href="/questions/user/<?=$_SESSION['username']?>">My Questions</a></li>
                 <li><a >Welcome, <?php echo $_SESSION['username'] ?></a></li>
                 <li><a href="/accounts/logout">Logout</a></li>
             </ul>
