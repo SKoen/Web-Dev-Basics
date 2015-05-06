@@ -8,7 +8,7 @@
 
 class AccountModel extends BaseModel{
 
-    public function register($username,$password){
+    public function register($username,$password,$fullname){
         if ($username == ''||$password=='') {
             return false;
         }
@@ -22,8 +22,8 @@ class AccountModel extends BaseModel{
         }
         $hash_pass = password_hash($password,PASSWORD_BCRYPT);
 
-        $registerStatement = self::$db->prepare('Insert Into users(username,password_hash) values(?,?)');
-        $registerStatement->bind_param("ss",$username,$hash_pass);
+        $registerStatement = self::$db->prepare('Insert Into users(username,password_hash,fullname) values(?,?,?)');
+        $registerStatement->bind_param("sss",$username,$hash_pass,$fullname);
         $registerStatement->execute();
 
         return true;

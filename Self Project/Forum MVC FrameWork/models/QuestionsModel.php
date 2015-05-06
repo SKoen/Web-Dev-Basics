@@ -30,11 +30,15 @@ class QuestionsModel extends  BaseModel {
         return $statement->fetch_all(MYSQLI_ASSOC);
     }
     public function getAllByAuthor($author){
-        $statement = self::$db->query(
-            "SELECT * FROM questions q
+        $statement = self::$db->prepare(
+            "SELECT q.*,u.username FROM questions q
             join users u on q.authorId=u.Id
-             where u.username = 'PeshoGoshev'");
-            return $statement->fetch_all(MYSQLI_ASSOC);
+             where u.username = ? ");
+        $statement->bind_param('s',$author);
+        $statement->execute();
+
+        $result=$statement->get_result()->fetch_assoc();
+            return $result;
     }
 
     public function getOne($id){
@@ -60,7 +64,7 @@ class QuestionsModel extends  BaseModel {
         if($result==null){
             $NewStatement = self::$db->prepare(
                 "select q.questionId,q.questionTitle,q.numberOfViews,q.questionText,q.dateCreated as 'questionDate' ,
-            u.username
+            u.username,u.FullName
             from questions q
             join users u on q.authorId=u.Id
             where q.questionId=?

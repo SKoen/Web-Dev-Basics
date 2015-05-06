@@ -16,7 +16,8 @@ class AccountsController extends BaseController {
         if($this->isPost){
             $username=$_POST['username'];
             $password=$_POST['password'];
-            $isRegister = $this->db->register($username,$password);
+            $fullname = $_POST['name'];
+            $isRegister = $this->db->register($username,$password,$fullname);
             if($isRegister){
                $_SESSION['username']=$username;
                 var_dump($_SESSION['username']);
