@@ -5,7 +5,11 @@
             <div class="form-group">
                 <label for="name" class="col-lg-2 control-label" >Name</label>
                 <div class="col-lg-10">
+                    <?php if($_SESSION['username']){ ?>
+                    <input type="text" name="name" disabled="" class="form-control" placeholder=<?=$_SESSION['username']?>>
+                    <?php } else { ?>
                     <input type="text" name="name" class="form-control" placeholder="Name">
+                    <?php } ?>
                 </div>
             </div>
             <div class="form-group">
