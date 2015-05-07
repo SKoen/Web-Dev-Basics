@@ -13,6 +13,18 @@
                 <textarea class="form-control" name="text" rows="5" id="inputQTextx"></textarea>
             </div>
         </div>
+        <div class="form-group" id="categories">
+            <script>
+                (function() {
+                    $.ajax({
+                        url: '/categories/getall',
+                        method: 'get'
+                    }).success(function (data) {
+                        $('#categories').html(data);
+                    })
+                }())
+            </script>
+        </div>
         <input type="hidden" name="username" value="<?=$_SESSION['username']?>">
     </fieldset>
     <div class="form-group">

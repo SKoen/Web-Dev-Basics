@@ -1,8 +1,8 @@
 <?php
 
 class QuestionsModel extends  BaseModel {
-    public function createQuestion($name,$text,$username){
-        if ($name == ''||$text==''||$username=='') {
+    public function createQuestion($name,$text,$username,$categoryId){
+        if ($name == ''||$text==''||$username==''||$categoryId=='') {
             return false;
         }
 
@@ -14,8 +14,8 @@ class QuestionsModel extends  BaseModel {
         $userId = $result['Id'];
 
         $otherStatement = self::$db->prepare(
-            'INSERT INTO questions(questionTitle,questionText,authorId) VALUES( ?, ?, ? )');
-        $otherStatement->bind_param('ssi', $name,$text,$userId);
+            'INSERT INTO questions(questionTitle,questionText,authorId,categoryId) VALUES( ?, ?, ?,? )');
+        $otherStatement->bind_param('ssii', $name,$text,$userId,$categoryId);
 
 
         $otherStatement->execute();
@@ -24,21 +24,23 @@ class QuestionsModel extends  BaseModel {
 
     public function getAll(){
         $statement = self::$db->query(
-            "SELECT q.*,u.username FROM questions q
-            join users u on q.authorId=u.Id");
+            "SELECT q.*,u.username,c.Name as categoryName FROM questions q
+            join users u on q.authorId=u.Id
+            join categories c on q.categoryId=c.Id
+            order by q.questionId desc");
 
         return $statement->fetch_all(MYSQLI_ASSOC);
     }
-    public function getAllByAuthor($author){
-        $statement = self::$db->prepare(
-            "SELECT q.*,u.username FROM questions q
-            join users u on q.authorId=u.Id
-             where u.username = ? ");
-        $statement->bind_param('s',$author);
-        $statement->execute();
 
-        $result=$statement->get_result()->fetch_assoc();
-            return $result;
+    public function getAllByAuthor($author){
+        $statement = self::$db->query(
+            "SELECT q.*,u.username,c.Name as categoryName FROM questions q
+            join users u on q.authorId=u.Id
+            join categories c on q.categoryId=c.Id
+            where u.username = 'test9'
+            order by q.questionId desc");
+
+        return $statement->fetch_all(MYSQLI_ASSOC);
     }
 
     public function getOne($id){

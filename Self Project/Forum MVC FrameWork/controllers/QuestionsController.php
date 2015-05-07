@@ -11,8 +11,9 @@ class QuestionsController extends BaseController {
             $name = $_POST['name'];
             $text = $_POST['text'];
             $username = $_POST['username'];
-            if ($this->db->createQuestion($name,$text,$username)) {
-                $this->redirectToUrl('/questions/user/$username>');
+            $categoryId = $_POST['categoryId'];
+            if ($this->db->createQuestion($name,$text,$username,$categoryId)) {
+                $this->redirectToUrl('/questions/user/'.$username);
             } else echo "BAD";
         }
 
