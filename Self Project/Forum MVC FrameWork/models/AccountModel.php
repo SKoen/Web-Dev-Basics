@@ -9,8 +9,8 @@
 class AccountModel extends BaseModel{
 
     public function register($username,$password,$fullname){
-        if ($username == ''||$password=='') {
-            return false;
+        if ($username == ''||$password==''||$fullname=='') {
+            return 'empty';
         }
         $statement = self::$db->prepare('SELECT COUNT(Id) from users where username = ?');
         $statement->bind_param("s",$username);

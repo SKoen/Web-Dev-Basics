@@ -18,12 +18,15 @@ class AccountsController extends BaseController {
             $password=$_POST['password'];
             $fullname = $_POST['name'];
             $isRegister = $this->db->register($username,$password,$fullname);
-            if($isRegister){
+            if($isRegister==='empty'){
+                $this->showMessage('You write empty username, password or full name !' ,'error');
+            }
+            elseif($isRegister){
                 $_SESSION['username']=$username;
                $this->redirect('home');
             }
-            else{
-                echo "ERRRORR";
+            if($isRegister==false){
+                $this->showMessage('This username is already taken','error');
             }
         }
     }
@@ -35,15 +38,17 @@ class AccountsController extends BaseController {
             if($isLogged){
                 $_SESSION['username']=$username;
                 $this->redirect('home');
+                $this->showMessage('Successfull login, Be welcome','success');
             }
             else{
-                echo "Error login";
+                $this->showMessage('Invalid username or password','error');
             }
         }
     }
     public function logout(){
         session_unset();
         $this->redirect('home');
+        $this->showMessage('Successfull logout','success');
     }
 
 }

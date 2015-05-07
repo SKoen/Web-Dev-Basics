@@ -14,7 +14,7 @@ class QuestionsController extends BaseController {
             $categoryId = $_POST['categoryId'];
             if ($this->db->createQuestion($name,$text,$username,$categoryId)) {
                 $this->redirectToUrl('/questions/user/'.$username);
-            } else echo "BAD";
+            } else echo $this->showMessage('Error must to fill all fields','error');
         }
 
     }
@@ -24,6 +24,7 @@ class QuestionsController extends BaseController {
 
     public  function index ($page=0,$pageSize=10){
 
+
         $this->page=$page;
         $this->pageSize=$pageSize;
 
@@ -32,6 +33,16 @@ class QuestionsController extends BaseController {
     }
 
     public  function user ($username){
-        $this->questions=$this->db->getAllByAuthor($username);
+        if(isset($_SESSION['username'])) {
+            if($_SESSION['username']==$username) {
+                $this->questions = $this->db->getAllByAuthor($username);
+            }
+            else {
+                header("Location: " . '/');
+            }
+        }
+        else {
+            header("Location: " . '/');
+        }
     }
 }

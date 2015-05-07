@@ -20,7 +20,7 @@ function showInfoMessage(msg) {
 
 function showErrorMessage(msg) {
     noty({
-            text: msg,
+            text: "errror",
             type: 'error',
             layout: 'topCenter',
             timeout: 5000}

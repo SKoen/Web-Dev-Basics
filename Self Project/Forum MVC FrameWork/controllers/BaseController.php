@@ -56,6 +56,19 @@ abstract class BaseController {
             $this->isViewRendered = true;
         }
     }
+
+    public function showMessage($msg,$type){
+        $this->msg= $msg;
+        if($type=='error') {
+            include('views/messages/errorMessage.php');
+        }
+        else {
+            include('views/messages/successMessage.php');
+        }
+
+    }
+
+
     public function redirectToUrl($url) {
         header("Location: " . $url);
         die;
