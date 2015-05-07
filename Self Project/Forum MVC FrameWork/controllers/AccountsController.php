@@ -10,6 +10,7 @@ class AccountsController extends BaseController {
 
     public function OnInit(){
         $this->db=new AccountModel();
+        if(isset($_SESSION['username'])) header("Location: " . '/');
     }
 
     public function register(){
@@ -31,19 +32,18 @@ class AccountsController extends BaseController {
         }
     }
     public function login(){
-        if($this->isPost){
-            $username = $_POST['username'];
-            $password = $_POST['password'];
-            $isLogged = $this->db->login($username,$password);
-            if($isLogged){
-                $_SESSION['username']=$username;
-                $this->redirect('home');
-                $this->showMessage('Successfull login, Be welcome','success');
+            if ($this->isPost) {
+                $username = $_POST['username'];
+                $password = $_POST['password'];
+                $isLogged = $this->db->login($username, $password);
+                if ($isLogged) {
+                    $_SESSION['username'] = $username;
+                    $this->redirect('home');
+                    $this->showMessage('Successfull login, Be welcome', 'success');
+                } else {
+                    $this->showMessage('Invalid username or password', 'error');
+                }
             }
-            else{
-                $this->showMessage('Invalid username or password','error');
-            }
-        }
     }
     public function logout(){
         session_unset();
