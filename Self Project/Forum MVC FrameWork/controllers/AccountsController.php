@@ -19,8 +19,7 @@ class AccountsController extends BaseController {
             $fullname = $_POST['name'];
             $isRegister = $this->db->register($username,$password,$fullname);
             if($isRegister){
-               $_SESSION['username']=$username;
-                var_dump($_SESSION['username']);
+                $_SESSION['username']=$username;
                $this->redirect('home');
             }
             else{

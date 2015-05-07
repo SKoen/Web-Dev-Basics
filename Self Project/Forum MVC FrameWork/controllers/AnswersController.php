@@ -5,6 +5,7 @@ class AnswersController extends BaseController {
         if ($this->isPost) {
             $this->db = new AnswersModel();
             $name = $_POST['name'];
+            if($name=="")$name=$_SESSION['username'];
             $email = $_POST['email'];
             $text = $_POST['text'];
             $questionId = $_POST['questionId'];
@@ -13,5 +14,11 @@ class AnswersController extends BaseController {
                 $this->redirectToUrl($url);
             } else echo "BAD";
         }
+    }
+
+    public function getAll($questionId){
+        $this->db= new AnswersModel();
+        $this->answers = $this->db->getAllByQuestionId($questionId);
+        $this->renderView('',false);
     }
 }
