@@ -19,8 +19,10 @@
             <td><?= htmlspecialchars($question['dateCreated']) ?></td>
             <td><?= htmlspecialchars($question['categoryName']) ?></td>
             <td><a href="/questions/show/<?=$question['questionId']?> ">READ</a></td>
+            <td><a href="/questions/delete/<?=$question['questionId']?> ">DELETE</a></td>
         </tr>
         <tr class="active">
+            <td></td>
             <td></td>
             <td></td>
             <td></td>

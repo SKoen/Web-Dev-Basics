@@ -18,8 +18,13 @@ class QuestionsController extends BaseController {
         }
 
     }
+
     public  function show($id){
         $this->question=$this->db->getOne($id);
+    }
+    public  function delete($id){
+        $this->db->delete($id);
+        $this->redirect('questions');
     }
 
     public  function index ($page=0,$pageSize=10){

@@ -36,14 +36,18 @@ class QuestionsModel extends  BaseModel {
     }
 
     public function getAllByAuthor($author){
-        $statement = self::$db->query(
+        $statement = self::$db->prepare(
             "SELECT q.*,u.username,c.Name as categoryName FROM questions q
             join users u on q.authorId=u.Id
             join categories c on q.categoryId=c.Id
-            where u.username = 'test9'
+            where u.username = ?
             order by q.questionId desc");
+        $statement->bind_param('s',$author);
+        $statement->execute();
 
-        return $statement->fetch_all(MYSQLI_ASSOC);
+        $result=$statement->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $result;
+
     }
 
     public function getOne($id){
@@ -80,6 +84,13 @@ class QuestionsModel extends  BaseModel {
 
 
         return $result;
+    }
+
+    public function delete($id){
+        $statement = self::$db->prepare(
+            "delete from questions where questionId = ? ");
+        $statement->bind_param('i',$id);
+        $statement->execute();
     }
 
 }

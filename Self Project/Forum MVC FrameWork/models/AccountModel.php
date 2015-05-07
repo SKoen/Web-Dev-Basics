@@ -33,12 +33,15 @@ class AccountModel extends BaseModel{
         if ($username == ''||$password=='') {
             return false;
         }
-        $statement = self::$db->prepare('SELECT Id,username,password_hash from users where username = ?');
+        $statement = self::$db->prepare('SELECT Id,username,password_hash,isAdmin from users where username = ?');
         $statement->bind_param("s",$username);
         $statement->execute();
         $result = $statement->get_result()->fetch_assoc();
 
         if(password_verify($password,$result['password_hash'])){
+            if($result['isAdmin']==1){
+                $_SESSION['isAdmin']=true;
+            }
             return true;
         }
 
