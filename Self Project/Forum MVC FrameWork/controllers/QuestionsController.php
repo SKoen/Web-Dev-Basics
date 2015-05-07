@@ -22,8 +22,13 @@ class QuestionsController extends BaseController {
         $this->question=$this->db->getOne($id);
     }
 
-    public  function index (){
-        $this->questions=$this->db->getAll();
+    public  function index ($page=0,$pageSize=10){
+
+        $this->page=$page;
+        $this->pageSize=$pageSize;
+
+        $page=$page*$pageSize;
+        $this->questions=$this->db->getAll($page,$pageSize);
     }
 
     public  function user ($username){

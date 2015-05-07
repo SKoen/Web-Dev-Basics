@@ -22,14 +22,17 @@ class QuestionsModel extends  BaseModel {
         return $otherStatement->affected_rows > 0;
     }
 
-    public function getAll(){
-        $statement = self::$db->query(
-            "SELECT q.*,u.username,c.Name as categoryName FROM questions q
+    public function getAll($page,$size){
+        $statement = self::$db->prepare(
+            "SELECT q.*,u.username,c.Name as categoryName  FROM questions q
             join users u on q.authorId=u.Id
             join categories c on q.categoryId=c.Id
-            order by q.questionId desc");
-
-        return $statement->fetch_all(MYSQLI_ASSOC);
+            order by q.questionId desc
+			LIMIT ?, ?");
+        $statement->bind_param("ii",$page,$size);
+        $statement->execute();
+        $result = $statement->get_result()->fetch_all(MYSQL_ASSOC);
+        return $result;
     }
 
     public function getAllByAuthor($author){
@@ -52,10 +55,9 @@ class QuestionsModel extends  BaseModel {
 
 
         $statement = self::$db->prepare(
-            "select q.questionId,q.questionTitle,q.numberOfViews,q.questionText,q.dateCreated as 'questionDate' ,
-            a.responderName,a.responderText,a.responderEmail,a.dateCreated as answerDate ,u.username
+            "select q.questionId,q.questionTitle,q.numberOfViews,q.questionText,q.dateCreated as 'questionDate'
+             ,u.username
             from questions q
-            join answers  a on q.questionId=a.questionID
             join users u on q.authorId=u.Id
             where q.questionId=?
             ");

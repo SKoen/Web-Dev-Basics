@@ -34,3 +34,12 @@
     <?php endforeach ?>
     </tbody>
 </table>
+
+<ul class="pager">
+    <?php if($this->page>0):?>
+        <li class="previous"><a href="/questions/index/<?=$this->page-1?>/<?=$this->pageSize?>">← Older</a></li>
+    <?php endif ?>
+    <?php if(count($this->questions)==$this->pageSize):?>
+    <li class="next"><a href="/questions/index/<?=$this->page+1?>/<?=$this->pageSize?>">Newer →</a></li>
+    <?php endif ?>
+</ul>
